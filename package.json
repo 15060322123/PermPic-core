@@ -1,9 +1,10 @@
 {
-  "version": "1.0.18",
+  "version": "1.0.30",
   "description": "Permpic core is a typescript library that supports permpic basic application functions, permweb upload / download and other common functions",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist",
     "src"

@@ -1,5 +1,4 @@
 import Arweave from 'arweave';
-// import { PermPicMeta } from "./type/fileMeta";
 import { permPicUser } from './type/base';
 import Transaction from 'arweave/node/lib/transaction';
 import {
@@ -21,7 +20,7 @@ export const arweave = Arweave.init({
 
 export async function preparePermPicTransaction(
   user: permPicUser,
-  fileData: any,
+  fileData: string | ArrayBuffer | Uint8Array | undefined,
   metaData: any
 ): Promise<any> {
   try {
@@ -31,7 +30,6 @@ export async function preparePermPicTransaction(
       },
       user.walletPrivateKey
     );
-
     transaction.addTag('PermPicVersion', PermPicVersion);
     transaction.addTag('PermPicId', uuid.v4());
 
@@ -40,7 +38,6 @@ export async function preparePermPicTransaction(
         transaction.addTag(key, metaData[key]);
       }
     }
-
     await arweave.transactions.sign(transaction, user.walletPrivateKey);
 
     return transaction;
@@ -118,7 +115,6 @@ export async function getPermPicLogList(owner: string) {
       }
     }`,
   };
-  console.log(query)
   const response = await arweave.api.request().post(arweaveGql, query);
   const { data } = response.data;
   const { transactions } = data;

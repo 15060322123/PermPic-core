@@ -1,6 +1,7 @@
 export interface permPicUser {
   walletPrivateKey: any;
   address: string;
+  balance: string;
 }
 
 export interface Transaction {
